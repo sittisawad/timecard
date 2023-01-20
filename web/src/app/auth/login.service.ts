@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, map, tap } from 'rxjs';
+import { BehaviorSubject, tap } from 'rxjs';
 import { Buffer } from 'buffer';
 
 import { ACCESS_TOKEN_KEY } from '../consts/login.consts';
@@ -20,7 +20,7 @@ export class LoginService {
 
   constructor(
     private readonly http: HttpClient,
-    private readonly routerService: Router
+    private readonly router: Router
   ) {}
 
   login(cred: LoginModel) {
@@ -74,7 +74,7 @@ export class LoginService {
     this.loginTokenSubject.next(null);
     localStorage.removeItem(ACCESS_TOKEN_KEY);
 
-    this.routerService.navigate(['/login']);
+    this.router.navigate(['/login']);
   }
 
   getLoginToken() {
