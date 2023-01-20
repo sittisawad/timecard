@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
+import { LoginCredential } from './auth/login.credential';
 import { LoginService } from './auth/login.service';
-import { LoginResponseDto } from './dtos/login-response.dto';
 
 @Component({
   selector: 'app-root',
@@ -13,9 +12,11 @@ export class AppComponent implements OnInit {
   isCollapsed = false;
   isLoginPage = false;
 
-  isLogin$?: Observable<LoginResponseDto | null>;
+  isLogin$?: Observable<LoginCredential | null>;
 
-  constructor(private readonly loginService: LoginService) {}
+  constructor(private readonly loginService: LoginService) {
+    loginService.restore();
+  }
 
   ngOnInit(): void {
     this.isLogin$ = this.loginService.getLoginToken();

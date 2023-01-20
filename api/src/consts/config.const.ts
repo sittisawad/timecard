@@ -1,2 +1,2 @@
 export const SECRET_KEY = "PRIVATE_SECRET";
-export const MONGO_KEY = "MONGODB_URI";
+export const MONGODB_URI_KEY = "MONGODB_URI";
