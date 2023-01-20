@@ -38,7 +38,8 @@ export class LoginService {
             id: payload.sub,
             email: payload.username,
             token: payload.access_token,
-            isAdmin: payload.isAdmin
+            isAdmin: payload.isAdmin,
+            expires: new Date(payload.exp * 1000),
           });
           localStorage.setItem(ACCESS_TOKEN_KEY, res.access_token);
         }
@@ -55,12 +56,17 @@ export class LoginService {
         ).toString('utf8')
       );
 
-      this.loginTokenSubject.next({
-        id: payload.sub,
-        email: payload.email,
-        token: payload.username,
-        isAdmin: payload.isAdmin
-      });
+      if (payload >= Date.now() * 1000) {
+        this.loginTokenSubject.next({
+          id: payload.sub,
+          email: payload.email,
+          token: payload.username,
+          isAdmin: payload.isAdmin,
+          expires: new Date(payload.exp * 1000),
+        });
+      } else {
+        this.logout();
+      }
     }
   }
 
