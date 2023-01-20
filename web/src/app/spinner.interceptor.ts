@@ -6,13 +6,17 @@ import {
   HttpInterceptor,
   HttpResponse,
 } from '@angular/common/http';
-import { Observable, tap } from 'rxjs';
+import { catchError, Observable, tap, of } from 'rxjs';
 import { ACCESS_TOKEN_KEY } from './consts/login.consts';
 import { NgxSpinnerService } from 'ngx-spinner';
+import { NzModalService } from 'ng-zorro-antd/modal';
 
 @Injectable()
 export class SpinnerInterceptor implements HttpInterceptor {
-  constructor(private readonly spinnerService: NgxSpinnerService) {}
+  constructor(
+    private readonly spinnerService: NgxSpinnerService,
+    private readonly modalService: NzModalService
+  ) {}
 
   intercept(
     request: HttpRequest<unknown>,
@@ -24,6 +28,14 @@ export class SpinnerInterceptor implements HttpInterceptor {
         if (evt instanceof HttpResponse) {
           this.spinnerService.hide();
         }
+      }),
+      catchError((err) => {
+        this.spinnerService.hide();
+        this.modalService.error({
+          nzTitle: 'Error!',
+          nzContent: 'Server down!',
+        });
+        return of(err);
       })
     );
   }

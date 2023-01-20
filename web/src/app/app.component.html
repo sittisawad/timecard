@@ -1,4 +1,7 @@
-<nz-layout class="app-layout" *ngIf="isLogin$ | async; else loginTemplate">
+<nz-layout
+  class="app-layout"
+  *ngIf="isLogin$ | async as loginData; else loginTemplate"
+>
   <nz-sider
     class="menu-sidebar"
     nzCollapsible
@@ -51,6 +54,18 @@
             [nzType]="isCollapsed ? 'menu-unfold' : 'menu-fold'"
           ></span>
         </span>
+        <div class="header-avatar">
+          <button
+            class="profile-button"
+            nz-button
+            nz-popover
+            [nzPopoverTitle]="'โปรไฟล์ของคุณ'"
+            [nzPopoverContent]="contentTemplate"
+            [nzPopoverPlacement]="'bottomRight'"
+          >
+            <nz-avatar [nzSize]="34" nzIcon="user"></nz-avatar>
+          </button>
+        </div>
       </div>
     </nz-header>
     <nz-content>
@@ -64,3 +79,14 @@
   <router-outlet></router-outlet>
 </ng-template>
 <ngx-spinner type="ball-scale-multiple"></ngx-spinner>
+<ng-template #contentTemplate>
+  <button
+    type="button"
+    nz-button
+    nzType="primary"
+    (click)="onLogout()"
+    style="width: 100%"
+  >
+    <span nz-icon nzType="logout" nzTheme="outline"></span> ออกจากระบบ
+  </button>
+</ng-template>

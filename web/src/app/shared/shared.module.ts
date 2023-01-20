@@ -8,6 +8,7 @@ import { NzGridModule } from 'ng-zorro-antd/grid';
 import { NzCardModule } from 'ng-zorro-antd/card';
 import { NzCheckboxModule } from 'ng-zorro-antd/checkbox';
 import { NzMessageModule } from 'ng-zorro-antd/message';
+import { NzPopoverModule } from 'ng-zorro-antd/popover';
 
 const includes = [
   CommonModule,
@@ -19,6 +20,7 @@ const includes = [
   NzCardModule,
   NzCheckboxModule,
   NzMessageModule,
+  NzPopoverModule
 ];
 
 @NgModule({

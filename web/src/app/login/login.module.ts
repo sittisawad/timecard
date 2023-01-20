@@ -5,6 +5,7 @@ import { NzFormModule } from 'ng-zorro-antd/form';
 import { LoginRoutingModule } from './login-routing.module';
 import { LoginComponent } from './login.component';
 import { SharedModule } from '../shared/shared.module';
+import { IconsProviderModule } from '../icons-provider.module';
 
 
 @NgModule({
@@ -15,6 +16,7 @@ import { SharedModule } from '../shared/shared.module';
     CommonModule,
     SharedModule,
     NzFormModule,
+    IconsProviderModule,
     LoginRoutingModule
   ]
 })

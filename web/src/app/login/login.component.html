@@ -1,6 +1,6 @@
 <div class="login-layout" nz-row nzJustify="center" nzAlign="middle">
   <div nz-col nzXs="24" nzMd="6">
-    <nz-card nzTitle="Login">
+    <nz-card nzTitle="Time Card Management System">
       <form
         nz-form
         class="login-form"
@@ -12,8 +12,8 @@
             [nzValidateStatus]="email.touched && email.invalid ? 'error' : ''"
             [nzErrorTip]="
               email.hasError('required')
-                ? 'Please input your email!'
-                : 'Please input valid email format!'
+                ? 'กรุณาระบุอีเมลของคุณ!'
+                : 'รูปแแบบอีเมลไม่ถูกต้อง!'
             "
           >
             <nz-input-group nzPrefixIcon="mail">
@@ -21,7 +21,7 @@
                 type="email"
                 nz-input
                 formControlName="email"
-                placeholder="Email"
+                placeholder="อีเมลของคุณ"
               />
             </nz-input-group>
           </nz-form-control>
@@ -33,8 +33,8 @@
             "
             [nzErrorTip]="
               password.hasError('required')
-                ? 'Please input your Password!'
-                : 'Password must have at least 8 characters!'
+                ? 'กรุณาเลือกระบุรหัสผ่าน!'
+                : 'รหัสผ่านต้องมีอยู่น้อย 8 ตัวอักขระ!'
             "
           >
             <nz-input-group nzPrefixIcon="lock">
@@ -42,25 +42,25 @@
                 type="password"
                 nz-input
                 formControlName="password"
-                placeholder="Password"
+                placeholder="รหัสผานของคุณ"
               />
             </nz-input-group>
           </nz-form-control>
         </nz-form-item>
         <div nz-row class="login-form-margin">
-          <div nz-col [nzSpan]="24">
+          <!-- <div nz-col [nzSpan]="24">
             <a class="login-form-forgot">Forgot password</a>
-          </div>
+          </div> -->
         </div>
         <button
           type="submit"
           nz-button
+          nzType="primary"
           class="login-form-button login-form-margin"
         >
-          Log in
+          <span nz-icon nzType="login"></span
+          >&nbsp;เข้าสู่ระบบ
         </button>
-        Or
-        <a>register now!</a>
       </form>
     </nz-card>
   </div>

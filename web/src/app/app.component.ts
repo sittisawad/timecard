@@ -14,11 +14,14 @@ export class AppComponent implements OnInit {
 
   isLogin$?: Observable<LoginCredential | null>;
 
-  constructor(private readonly loginService: LoginService) {
-    loginService.restore();
-  }
+  constructor(private readonly loginService: LoginService) {}
 
   ngOnInit(): void {
     this.isLogin$ = this.loginService.getLoginToken();
+  }
+
+
+  onLogout() {
+    this.loginService.logout();
   }
 }
