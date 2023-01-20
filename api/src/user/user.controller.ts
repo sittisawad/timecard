@@ -1,21 +1,36 @@
-import { Body, Controller, HttpCode, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  HttpCode,
+  Post,
+  UseGuards,
+  Param,
+  Delete,
+} from '@nestjs/common';
 import { HttpStatus } from '@nestjs/common/enums';
-import { LoginDto } from './dtos/login.dto';
-import { RegisterDto } from './dtos/register.dto';
+import { HttpException } from '@nestjs/common/exceptions';
+import { JwtAuthGuard } from 'src/auth/jwt-auth.guard';
+import { CreateUserDto } from 'src/dtos/user/create.dto';
+import { GetUserDto } from 'src/dtos/user/get-user.dto';
 import { UserService } from './user.service';
 
-@Controller()
+@Controller('users')
 export class UserController {
-  constructor(private readonly userService: UserService) {}
+  constructor(private userService: UserService) {}
 
-  @Post('register')
-  async register(@Body() user: RegisterDto) {
-    await this.userService.register(user);
+  @UseGuards(JwtAuthGuard)
+  @Post()
+  @HttpCode(HttpStatus.OK)
+  async createUser(@Body() user: CreateUserDto) {
+    if (!(await this.userService.createUser(user))) {
+      throw new HttpException('User already exists!', HttpStatus.CONFLICT);
+    }
   }
 
-  @Post('login')
+  @UseGuards(JwtAuthGuard)
+  @Delete(':id')
   @HttpCode(HttpStatus.OK)
-  async login(@Body() user: LoginDto) {
-    return this.userService.login(user);
+  async getUser(@Param() params: GetUserDto) {
+    return await this.userService.findUserAndRemoveById(params.id);
   }
 }

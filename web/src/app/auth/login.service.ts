@@ -38,6 +38,7 @@ export class LoginService {
             id: payload.sub,
             email: payload.username,
             token: payload.access_token,
+            isAdmin: payload.isAdmin
           });
           localStorage.setItem(ACCESS_TOKEN_KEY, res.access_token);
         }
@@ -58,6 +59,7 @@ export class LoginService {
         id: payload.sub,
         email: payload.email,
         token: payload.username,
+        isAdmin: payload.isAdmin
       });
     }
   }
