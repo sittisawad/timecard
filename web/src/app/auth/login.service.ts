@@ -56,7 +56,7 @@ export class LoginService {
         ).toString('utf8')
       );
 
-      if (payload >= Date.now() * 1000) {
+      if (payload.exp >= Date.now() / 1000) {
         this.loginTokenSubject.next({
           id: payload.sub,
           email: payload.email,

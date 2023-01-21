@@ -2,15 +2,15 @@ import { ExtractJwt, Strategy } from 'passport-jwt';
 import { PassportStrategy } from '@nestjs/passport';
 import { Injectable } from '@nestjs/common';
 import { ConfigService } from '@nestjs/config';
-import { SECRET_KEY } from 'src/consts/config.const';
+import { JWT_SECRET_KEY, JWT_PERIOD_KEY } from 'src/consts/config.const';
 
 @Injectable()
 export class JwtStrategy extends PassportStrategy(Strategy) {
   constructor(private readonly configService: ConfigService) {
     super({
       jwtFromRequest: ExtractJwt.fromAuthHeaderAsBearerToken(),
-      ignoreExpiration: false,
-      secretOrKey: <string>configService.get(SECRET_KEY),
+      ignoreExpiration: true,
+      secretOrKey: <string>configService.get(JWT_SECRET_KEY),
     });
   }
 

@@ -25,11 +25,12 @@ import { AppComponent } from './app.component';
 import { IconsProviderModule } from './icons-provider.module';
 import { SpinnerInterceptor } from './spinner.interceptor';
 import { LoginService } from './auth/login.service';
+import { BasicComponent } from './profile/basic/basic.component';
 
 registerLocaleData(th);
 
 @NgModule({
-  declarations: [AppComponent],
+  declarations: [AppComponent, BasicComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
